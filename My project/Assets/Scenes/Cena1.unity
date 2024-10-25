@@ -214,6 +214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 560989366}
   - component: {fileID: 560989367}
+  - component: {fileID: 560989368}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -277,7 +278,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: -4099418257374492983, guid: 23b06bafe9f9ffe41adda0d582a103dc, type: 3}
+  m_Sprite: {fileID: 8953634022533174877, guid: e60a124afaf10b941a9ebf6c1f43f0b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -288,6 +289,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &560989368
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560989365}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bbe147896b291dd47809230b43020677, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &650500586
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,7 +493,7 @@ GameObject:
   - component: {fileID: 1389798333}
   - component: {fileID: 1389798332}
   - component: {fileID: 1389798331}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2809,7 +2832,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  Jumpforce: 10
+  Jumpforce: 8
+  isJumping: 0
+  DoubleJump: 0
 --- !u!50 &1413288704
 Rigidbody2D:
   serializedVersion: 4
@@ -2826,7 +2851,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 3
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: eb49ef015896bf74599cac6857833296, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2871,8 +2896,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.020143986, y: 0}
-  m_Radius: 0.40733758
+  m_Offset: {x: -0.020143986, y: -0.12}
+  m_Radius: 0.25644705
 --- !u!4 &1413288706
 Transform:
   m_ObjectHideFlags: 0
