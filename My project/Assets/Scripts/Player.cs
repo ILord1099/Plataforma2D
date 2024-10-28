@@ -10,6 +10,11 @@ public class Player : MonoBehaviour
     public bool DoubleJump;
     private Rigidbody2D rig;
 
+    public Transform point;
+    public float radius;
+    public bool isAttacking;
+
+    public Animator anim;
     void Start()
     {
      
@@ -20,6 +25,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         Jump();
+        Attack();
     }
     private void FixedUpdate()
     {
@@ -33,11 +39,25 @@ public class Player : MonoBehaviour
 
         if (movement > 0)
         {
+            if (!isJumping && !isAttacking)
+            {
+                anim.SetInteger("transition", 1);
+            }
+           
             transform.eulerAngles = new Vector3(0, 0, 0);
         }
-        if (movement < 0)
+        if (movement < 0 && !isAttacking)
         {
+            if (!isJumping)
+            {
+                anim.SetInteger("transition", 1);
+            }
+           
             transform.eulerAngles = new Vector3(0, 180, 0);
+        }
+        if(movement == 0 && !isJumping && !isAttacking)
+        {
+            anim.SetInteger("transition", 0);
         }
     }
      void Jump()
@@ -46,6 +66,7 @@ public class Player : MonoBehaviour
         {
             if (!isJumping)
             {
+                anim.SetInteger("transition", 2);
                 rig.AddForce(Vector2.up * Jumpforce, ForceMode2D.Impulse);
                 isJumping = true;
                 DoubleJump = true;
@@ -53,13 +74,42 @@ public class Player : MonoBehaviour
             }
             else if (DoubleJump)
             {
+                anim.SetInteger("transition", 2);
                 rig.AddForce(Vector2.up * Jumpforce, ForceMode2D.Impulse);
                 DoubleJump = false;
             }
         }
     }
+    void Attack()
+    {
 
-     void OnCollisionEnter2D(Collision2D collision)
+        if (Input.GetButtonDown("Fire1"))
+        {
+            isAttacking = true;
+            anim.SetInteger("transition", 3);
+            Collider2D hit = Physics2D.OverlapCircle(point.position, radius);
+
+            if (hit != null)
+            {
+                Debug.Log(hit.name);
+            }
+            StartCoroutine(OnAttack());
+        }
+
+        
+
+    }
+    IEnumerator OnAttack()
+    {
+        yield return new WaitForSeconds(0.3f);
+        isAttacking = false;
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(point.position, radius);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.layer == 8)
         {
